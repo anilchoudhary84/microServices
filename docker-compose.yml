@@ -1,0 +1,74 @@
+version: "3"
+services:
+  zookeeper:
+    image: zookeeper
+    hostname: zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: confluentinc/cp-kafka
+    hostname: kafka
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+         KAFKA_ADVERTISED_HOST_NAME: kafka
+         KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+         KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+         KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+         KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+     - '27017:27017'
+    depends_on:
+      - kafka
+  sso:
+    build: ./sso
+    volumes:
+      - ./sso/:/app
+      - /app/node_modules
+    ports: 
+     - '3200:3200'
+    external_links: 
+    - mongo
+    depends_on:
+      - mongo
+
+  bankingtransactions:
+    build: ./bankingtransactions
+    volumes:
+      - ./bankingtransactions/:/app
+      - /app/node_modules
+    ports: 
+      - '3000:3000'
+    external_links: 
+    - mongo
+    depends_on:
+      - sso
+  bankingreports:
+    build: ./bankingreports
+    volumes:
+      - ./bankingreports/:/app
+      - /app/node_modules
+    ports: 
+     - '3300:3300'
+    depends_on:
+      - sso
+  nginx:
+    build: ./nginx
+    container_name: anil_nginx
+    depends_on:
+      - bankingreports
+      - sso
+    ports: 
+      - '80:80'
+
+    
+

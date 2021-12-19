@@ -1,0 +1,33 @@
+{
+    "name": "bankingreports",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js && nodemon index.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "1.19.0",
+        "compression": "^1.7.4",
+        "cors": "^2.8.5",
+        "currency-converter-lt": "^1.1.4",
+        "ejs": "^2.6.1",
+        "express": "^4.16.3",
+        "helmet": "^4.6.0",
+        "http": "^0.0.1-security",
+        "jsonwebtoken": "^8.5.1",
+        "jwt-decode": "^3.1.2",
+        "kafkajs": "^1.15.0",
+        "mongoose": "^5.2.7",
+        "uuid": "^8.3.2"
+    },
+    "devDependencies": {
+        "eslint-import-resolver-typescript": "^2.5.0",
+        "nodejs-currency-converter": "^1.0.2",
+        "nodemon": "^2.0.15"
+    }
+}

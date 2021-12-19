@@ -1,0 +1,195 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "My SSO API",
+        "description": "SSO API Doc"
+    },
+    "host": "localhost:80",
+    "basePath": "/sso",
+    "schemes": [
+        "http"
+    ],
+    "tags": [
+        {
+            "name": "Verify Token",
+            "description": "Verify user token"
+        }
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/add": {
+            "post": {
+                "tags": [
+                    "add User"
+                ],
+                "summary": "Add user in SSO",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/bodyAddUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responseAddUser"
+                        }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "Login SSO"
+                ],
+                "summary": "login  SSO",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/bodyLoginUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responseAddUser"
+                        }
+                    }
+                }
+            }
+        },
+        "/verify": {
+            "get": {
+                "tags": [
+                    "Verify Token"
+                ],
+                "summary": "Verify the user token",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responseVerifyToken"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "bodyAddUser": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "iban": {
+                    "type": "string"
+                }
+            }
+        },
+        "responseAddUser": {
+            "type": "object",
+            "properties": {
+                "_error_message": {
+                    "type": "string"
+                },
+                "_success_message": {
+                    "type": "string"
+                },
+                "_status_Code": {
+                    "type": "integer"
+                },
+                "_status": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "object",
+                    "properties": {
+                        "status": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "email": {
+                            "type": "string"
+                        },
+                        "iban": {
+                            "type": "string"
+                        },
+                        "_id": {
+                            "type": "string"
+                        },
+                        "createdOn": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "bodyLoginUser": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "responseVerifyToken": {
+            "type": "object",
+            "properties": {
+                "_error_message": {
+                    "type": "string"
+                },
+                "_success_message": {
+                    "type": "string"
+                },
+                "_status_Code": {
+                    "type": "integer"
+                },
+                "_status": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "object",
+                    "properties": {
+                        "email": {
+                            "type": "string"
+                        },
+                        "iban": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
