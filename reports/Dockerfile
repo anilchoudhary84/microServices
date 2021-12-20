@@ -8,6 +8,9 @@ COPY package.json /app
 
 RUN npm install
 
+VOLUME [ "./reports/:/app" ]
+VOLUME [ "/app/node_modules" ]
+
 COPY . ./app
 
 EXPOSE 3300

@@ -33,7 +33,8 @@ services:
     build: ./sso
     volumes:
       - ./sso/:/app
-      - /app/node_modules
+    image: anil8484/sso 
+    container_name: sso
     ports: 
      - '3200:3200'
     external_links: 
@@ -41,31 +42,35 @@ services:
     depends_on:
       - mongo
 
-  bankingtransactions:
-    build: ./bankingtransactions
+  transactions:
+    build: ./transactions
     volumes:
-      - ./bankingtransactions/:/app
-      - /app/node_modules
+      - ./transactions/:/app
+    image: anil8484/transactions 
+    container_name: transactions
     ports: 
       - '3000:3000'
     external_links: 
     - mongo
     depends_on:
       - sso
-  bankingreports:
-    build: ./bankingreports
+  reports:
+    build: ./reports
     volumes:
-      - ./bankingreports/:/app
-      - /app/node_modules
+      - ./reports/:/app
+    image: anil8484/reports 
+    container_name: reports
     ports: 
      - '3300:3300'
     depends_on:
       - sso
   nginx:
     build: ./nginx
-    container_name: anil_nginx
+    image: anil8484/nginx 
+    container_name: nginx
     depends_on:
-      - bankingreports
+      - reports
+      - transactions
       - sso
     ports: 
       - '80:80'
