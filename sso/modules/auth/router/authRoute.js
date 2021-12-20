@@ -16,24 +16,6 @@ router.use((req, res, next) => {
 });
 router.post("/login", AuthController.login);
 router.post("/add", AuthController.add);
-
-
-
-
-/**
- * @swagger
- * /verify:
- *  get:
- *    summary: Verify token
- *    parameters:
- *      - in: header
- *        name: token
- *        description: Use token  to verify token
- *        required: true 
- *    responses:
- *      '200':
- *        description: token verification Success
- */
 router.get("/verify", AuthService.isAuthenticated, AuthController.verify);
 
 

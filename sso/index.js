@@ -34,5 +34,4 @@ server.listen(port, () => {
 
     console.log(`SSO app listening at http://localhost:${port}`);
 
-
 })
