@@ -10,7 +10,7 @@ router.use((req, res, next) => {
   );
   next();
 });
-router.post("/", TransactionEntryController.insertTransactions);
+router.post("/add", TransactionEntryController.insertTransactions);
 
 
 export default router;

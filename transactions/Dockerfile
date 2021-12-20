@@ -10,11 +10,10 @@ RUN npm install
 
 # VOLUME [ "./transactions/:/app" ]
 # VOLUME [ "/app/node_modules" ]
-
 # COPY . ./app
 COPY . /app
 
-EXPOSE 3000
+EXPOSE 3100
 
-ENV PORT 3000
+ENV PORT 3100
 CMD ["npm", "start"]

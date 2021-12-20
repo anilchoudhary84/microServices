@@ -1,11 +1,11 @@
 {
-    "name": "bankingtransactions",
+    "name": "transactions",
     "version": "1.0.0",
     "type": "module",
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "node index.js && nodemon index.js"
+        "start": "node --experimental-json-modules index.js && nodemon index.js"
     },
     "keywords": [],
     "author": "",
@@ -18,8 +18,12 @@
         "express": "^4.16.3",
         "helmet": "^4.6.0",
         "http": "^0.0.1-security",
+        "jsonwebtoken": "^8.5.1",
+        "jwt-decode": "^3.1.2",
         "kafkajs": "^1.15.0",
         "mongoose": "^5.2.7",
+        "swagger-jsdoc": "^6.1.0",
+        "swagger-ui-express": "^4.3.0",
         "uuid": "^8.3.2"
     },
     "devDependencies": {

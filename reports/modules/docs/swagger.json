@@ -1,0 +1,190 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "My Reports API",
+        "description": "Reports API Doc"
+    },
+    "host": "localhost:80",
+    "basePath": "/reports",
+    "schemes": [
+        "http"
+    ],
+    "tags": [
+        {
+            "name": "Banking Reports",
+            "description": "Get Reports"
+        }
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/userreports/{currency}/{month}": {
+            "get": {
+                "tags": [
+                    "Get Reports"
+                ],
+                "summary": "Get reports by user",
+                "operationId": "getReports",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "currency",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "Where the ACurrencyD is being displayed",
+                        "default": "USD"
+                    },
+                    {
+                        "name": "month",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true,
+                        "format": "int32",
+                        "description": "Where the Month is being displayed",
+                        "default": 11
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "type": "integer",
+                        "required": true,
+                        "format": "int32"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "type": "integer",
+                        "required": true,
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responseReportList"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "responseReportList": {
+            "type": "object",
+            "properties": {
+                "_error_message": {
+                    "type": "string"
+                },
+                "_success_message": {
+                    "type": "string"
+                },
+                "_status_Code": {
+                    "type": "integer"
+                },
+                "_status": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "object",
+                    "properties": {
+                        "totalDebitAmount": {
+                            "type": "string"
+                        },
+                        "totalCreditAmount": {
+                            "type": "string"
+                        },
+                        "next": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer"
+                                },
+                                "limit": {
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "previous": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer"
+                                },
+                                "limit": {
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "transactions": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "amount": {
+                                        "type": "string"
+                                    },
+                                    "currency": {
+                                        "type": "string"
+                                    },
+                                    "tranDescription": {
+                                        "type": "string"
+                                    },
+                                    "tranType": {
+                                        "type": "string"
+                                    },
+                                    "iban": {
+                                        "type": "string"
+                                    },
+                                    "_id": {
+                                        "type": "string"
+                                    },
+                                    "createdOn": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "arrayItems": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "string"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "tranDescription": {
+                    "type": "string"
+                },
+                "tranType": {
+                    "type": "string"
+                },
+                "iban": {
+                    "type": "string"
+                },
+                "_id": {
+                    "type": "string"
+                },
+                "createdOn": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

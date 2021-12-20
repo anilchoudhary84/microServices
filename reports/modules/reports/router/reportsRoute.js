@@ -9,7 +9,7 @@ router.use((req, res, next) => {
   );
   next();
 });
-router.get("/:currency/:month?", ReportsController.getTransactions);
+router.get("/userreports/:currency/:month?", ReportsController.getTransactions);
 
 
 export default router;

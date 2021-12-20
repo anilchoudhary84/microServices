@@ -1,0 +1,118 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "My Transaction API",
+        "description": "Transaction API Doc"
+    },
+    "host": "localhost:80",
+    "basePath": "/transactions",
+    "schemes": [
+        "http"
+    ],
+    "tags": [
+        {
+            "name": "Transactions Token",
+            "description": "Add transactions"
+        }
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/add": {
+            "post": {
+                "tags": [
+                    "add Transaction"
+                ],
+                "summary": "Add transactions in Transaction Service",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/bodyAddTransaction"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responseAddTransaction"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "bodyAddTransaction": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "integer"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "tranDescription": {
+                    "type": "string"
+                },
+                "tranType": {
+                    "type": "string"
+                },
+                "iban": {
+                    "type": "string"
+                }
+            }
+        },
+        "responseAddTransaction": {
+            "type": "object",
+            "properties": {
+                "_error_message": {
+                    "type": "string"
+                },
+                "_success_message": {
+                    "type": "string"
+                },
+                "_status_Code": {
+                    "type": "integer"
+                },
+                "_status": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "object",
+                    "properties": {
+                        "amount": {
+                            "type": "string"
+                        },
+                        "currency": {
+                            "type": "string"
+                        },
+                        "tranDescription": {
+                            "type": "string"
+                        },
+                        "tranType": {
+                            "type": "string"
+                        },
+                        "iban": {
+                            "type": "string"
+                        },
+                        "_id": {
+                            "type": "string"
+                        },
+                        "createdOn": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
