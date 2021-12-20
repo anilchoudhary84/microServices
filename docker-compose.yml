@@ -30,11 +30,11 @@ services:
     depends_on:
       - kafka
   sso:
-    build: ./sso
-    volumes:
-      - ./sso/:/app
-    # image: anil8484/sso 
-    # container_name: sso
+    # build: ./sso
+    # volumes:
+    #   - ./sso/:/app
+    image: anil8484/sso 
+    container_name: sso
     ports: 
      - '3200:3200'
     external_links: 
