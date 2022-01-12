@@ -79,16 +79,20 @@ class TransactionEntryController {
             console.log("here is final  data, ", JSON.stringify(userSpecificData));
             let result = await ReportService.getTransactions(toCurrency, inputConsumerData);
             if (endIndex < userSpecificData.length) {
+                console.log("here is final  data11, ");
                 result['next'] = {
                     page: page + 1,
                     limit: limit
                 }
+                console.log("here is final  data22, ");
             }
             if (startIndex > 0) {
+                console.log("here is final  data33, ");
                 result['previous'] = {
                     page: page - 1,
                     limit: limit
                 }
+                console.log("here is final  data44, ");
             }
 
             var response = {
@@ -97,7 +101,8 @@ class TransactionEntryController {
                 '_status': 'success',
                 'result': result
             }
-            res.send(response)
+            console.log("here is final  data55, ");
+            res.send(response);
         } catch (err) {
             console.log("throwing error here in reports")
             res.status(404).send({ message: err.toString() });

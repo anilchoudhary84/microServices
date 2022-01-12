@@ -54,8 +54,6 @@ services:
     - mongo
     depends_on:
       - sso
-      - mongo
-      - kafka
   reports:
     # build: ./reports  #local
     # volumes:            #local
@@ -66,8 +64,6 @@ services:
      - '3300:3300'
     depends_on:
       - sso
-      - mongo
-      - kafka
   nginx:
     # build: ./nginx
     image: anil8484/nginx 
@@ -76,8 +72,6 @@ services:
       - reports
       - transactions
       - sso
-      - mongo
-      - kafka
     ports: 
       - '80:80'
 
