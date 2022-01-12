@@ -54,16 +54,20 @@ services:
     - mongo
     depends_on:
       - sso
+      - mongo
+      - kafka
   reports:
-    # build: ./reports
-    # volumes:
-    #   - ./reports/:/app
-    image: anil8484/reports 
-    container_name: reports
-    ports: 
+    # build: ./reports  #local
+    # volumes:            #local
+    #   - ./reports/:/app    #local
+    image: anil8484/reports     #server
+    container_name: reports      #server
+    ports:  
      - '3300:3300'
     depends_on:
       - sso
+      - mongo
+      - kafka
   nginx:
     # build: ./nginx
     image: anil8484/nginx 
@@ -72,6 +76,8 @@ services:
       - reports
       - transactions
       - sso
+      - mongo
+      - kafka
     ports: 
       - '80:80'
 

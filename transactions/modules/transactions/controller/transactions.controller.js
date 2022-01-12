@@ -11,7 +11,7 @@ class TransactionEntryController {
             await ProducerService.sendMessage(result);
             res.status(200).json(result);
         } catch (err) {
-            console.log("here is error")
+            console.log("here is error in transaction while sending messages to producer", err)
             res.status(404).send({ message: err.toString() });
         }
 
