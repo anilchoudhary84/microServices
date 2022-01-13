@@ -9,15 +9,11 @@ const getTransactions = async (toCurrency, consumerData) => {
         let singleUserOutput = transactionObj.message;
         let fromCurrency = singleUserOutput.currency;
         let currencyAmount = 1;
-        console.log("before", JSON.stringify(singleUserOutput));
         let currencyConverter = new CC({ from: fromCurrency, to: toCurrency, amount: currencyAmount })
-        console.log("before 11", JSON.stringify(singleUserOutput));
         let responseofCurrency = await currencyConverter.convert();
-        console.log("before 22", JSON.stringify(singleUserOutput));
         let outputAmount = singleUserOutput.amount * responseofCurrency;
         singleUserOutput.amount = outputAmount.toFixed(2)
         singleUserOutput.currency = toCurrency;
-        console.log("after", JSON.stringify(singleUserOutput));
         if (singleUserOutput.tranType == "DR") {
             totalDebitAmount = totalDebitAmount + outputAmount;
         } else {
