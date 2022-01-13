@@ -8,10 +8,10 @@ COPY package.json /app
 
 RUN npm install
 
-# VOLUME [ "./transactions/:/app" ]
-# VOLUME [ "/app/node_modules" ]
-# COPY . ./app
-COPY . /app
+VOLUME [ "./transactions/:/app" ]
+VOLUME [ "/app/node_modules" ]
+COPY . ./app
+# COPY . /app
 
 EXPOSE 3100
 

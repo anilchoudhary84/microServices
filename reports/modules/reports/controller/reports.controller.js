@@ -49,27 +49,9 @@ class TransactionEntryController {
             let toCurrency = req.params.currency;
             const consumerData = await ConsumerService.getAllTransaction();
             console.log("here is consumer data, ", JSON.stringify(consumerData));
-
-
-            // var monthlyData = req.params.month != undefined ? consumerData.filter(function (el) {
-            //     return new Date(el.message.createdOn).getMonth() + 1 == req.params.month;
-            // }) : consumerData;
-            let monthlyData = [];
-            if (req.params.month != undefined) {
-                for (let i = 0; i < consumerData.length; i++) {
-                    let messageMonth = new Date(consumerData[i].message.createdOn).getMonth();
-                    console.log("message month", messageMonth);
-                    messageMonth = messageMonth + 1;
-                    console.log("message month after adding", messageMonth)
-                    if (messageMonth == req.params.month) {
-                        monthlyData.push(consumerData[i]);
-                    }
-                }
-            } else {
-                monthlyData = consumerData;
-            }
-
-
+            var monthlyData = req.params.month != undefined ? consumerData.filter(function (el) {
+                return new Date(el.message.createdOn).getMonth() + 1 == req.params.month;
+            }) : consumerData;
             console.log("here is monthly  data, ", JSON.stringify(monthlyData));
             var userSpecificData = userIban != null ? monthlyData.filter(function (el) {
                 return el.message.iban == userIban;
@@ -79,20 +61,16 @@ class TransactionEntryController {
             console.log("here is final  data, ", JSON.stringify(userSpecificData));
             let result = await ReportService.getTransactions(toCurrency, inputConsumerData);
             if (endIndex < userSpecificData.length) {
-                console.log("here is final  data11, ");
                 result['next'] = {
                     page: page + 1,
                     limit: limit
                 }
-                console.log("here is final  data22, ");
             }
             if (startIndex > 0) {
-                console.log("here is final  data33, ");
                 result['previous'] = {
                     page: page - 1,
                     limit: limit
                 }
-                console.log("here is final  data44, ");
             }
 
             var response = {
@@ -101,10 +79,9 @@ class TransactionEntryController {
                 '_status': 'success',
                 'result': result
             }
-            console.log("here is final  data55, ");
-            res.send(response);
+            res.send(response)
         } catch (err) {
-            console.log("throwing error here in reports")
+            console.log("throwing error here")
             res.status(404).send({ message: err.toString() });
         }
     }

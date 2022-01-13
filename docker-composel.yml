@@ -30,11 +30,11 @@ services:
     depends_on:
       - kafka
   sso:
-    build: ./sso
-    volumes:
-      - ./sso/:/app
-    # image: anil8484/sso 
-    # container_name: sso
+    # build: ./sso
+    # volumes:
+    #   - ./sso/:/app
+    image: anil8484/sso 
+    container_name: sso
     ports: 
      - '3200:3200'
     external_links: 
@@ -43,11 +43,11 @@ services:
       - mongo
 
   transactions:
-    build: ./transactions
-    volumes:
-      - ./transactions/:/app
-    # image: anil8484/transactions 
-    # container_name: transactions
+    # build: ./transactions
+    # volumes:
+    #   - ./transactions/:/app
+    image: anil8484/transactions 
+    container_name: transactions
     ports: 
       - '3100:3100'
     external_links: 
@@ -65,9 +65,9 @@ services:
     depends_on:
       - sso
   nginx:
-    build: ./nginx
-    # image: anil8484/nginx 
-    # container_name: nginx
+    # build: ./nginx
+    image: anil8484/nginx 
+    container_name: nginx
     depends_on:
       - reports
       - transactions
